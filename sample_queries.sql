@@ -8,8 +8,10 @@ JOIN        rating       r  ON r.song_id   = sa.song_id
 GROUP BY a.artist_id, a.name
 ORDER BY avg_rating DESC;
 
-SELECT title, AVG(score) AS avg_score
-FROM   song   s
-JOIN   rating r ON r.songid = s.songid
-GROUP  BY title
-ORDER  BY avg_score DESC;
+SELECT  s.title,
+        AVG(r.rating) AS avg_rating
+FROM    song   s
+JOIN    rating r ON r.song_id = s.song_id
+GROUP BY s.title
+ORDER BY avg_rating DESC;
+
