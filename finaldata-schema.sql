@@ -1,50 +1,74 @@
-DROP TABLE rating       CASCADE CONSTRAINTS;
-DROP TABLE song_artist  CASCADE CONSTRAINTS;
-DROP TABLE song         CASCADE CONSTRAINTS;
-DROP TABLE artist       CASCADE CONSTRAINTS;
-DROP TABLE app_user     CASCADE CONSTRAINTS;  
+
+DROP TABLE rating        CASCADE CONSTRAINTS;
+DROP TABLE song_artist   CASCADE CONSTRAINTS;
+DROP TABLE song          CASCADE CONSTRAINTS;
+DROP TABLE artist        CASCADE CONSTRAINTS;
+DROP TABLE app_user      CASCADE CONSTRAINTS;
 
 CREATE TABLE app_user (
-  userid      NUMBER(10),            
-  fname       VARCHAR2(30),
-  lname       VARCHAR2(30),
-  email       VARCHAR2(255) NOT NULL,
-  pass_hash   VARCHAR2(100) NOT NULL,
-  PRIMARY KEY (userid),
-  UNIQUE (email)
+  user_id   NUMBER(10)          PRIMARY KEY,
+  username  VARCHAR2(30) UNIQUE NOT NULL,
+  email     VARCHAR2(255) UNIQUE NOT NULL,
+  password  VARCHAR2(100)       NOT NULL
 );
 
 CREATE TABLE artist (
-  artistid    NUMBER(10),           
-  fname       VARCHAR2(30),
-  lname       VARCHAR2(30),
-  dob         DATE,
-  PRIMARY KEY (artistid)
+  artist_id NUMBER(10)          PRIMARY KEY,
+  name      VARCHAR2(120) UNIQUE NOT NULL
 );
 
 CREATE TABLE song (
-  songid        NUMBER(10),         
-  title         VARCHAR2(200) NOT NULL,
-  release_year  NUMBER(4),
-  PRIMARY KEY (songid)
+  song_id      NUMBER(10)       PRIMARY KEY,
+  title        VARCHAR2(200)    NOT NULL,
+  release_year NUMBER(4)
 );
 
-
-CREATE TABLE song_artist (
-  songid   NUMBER(10),
-  artistid NUMBER(10),
-  PRIMARY KEY (songid, artistid),
-  FOREIGN KEY (songid)  REFERENCES song(songid),
-  FOREIGN KEY (artistid) REFERENCES artist(artistid)
+CREATE TABLE song_artist (               
+  song_id   NUMBER(10),
+  artist_id NUMBER(10),
+  PRIMARY KEY (song_id, artist_id),
+  FOREIGN KEY (song_id)   REFERENCES song(song_id),
+  FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
 );
 
 CREATE TABLE rating (
-  userid   NUMBER(10),
-  songid   NUMBER(10),
-  score    NUMBER(1) NOT NULL,
-  rdate    DATE      DEFAULT SYSDATE,
-  PRIMARY KEY (userid, songid),
-  FOREIGN KEY (userid) REFERENCES app_user(userid),
-  FOREIGN KEY (songid) REFERENCES song(songid),
-  CHECK (score BETWEEN 1 AND 5)
+  user_id    NUMBER(10),
+  song_id    NUMBER(10),
+  rating     NUMBER(1)      NOT NULL,
+  review     VARCHAR2(1000),
+  created_at TIMESTAMP      DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (user_id, song_id),
+  FOREIGN KEY (user_id) REFERENCES app_user(user_id),
+  FOREIGN KEY (song_id) REFERENCES song(song_id),
+  CHECK (rating BETWEEN 1 AND 5)
 );
+
+INSERT INTO app_user VALUES (1,'NATC','NCHIMBAY@GMAIL.COM','NEWARKJULY1');
+INSERT INTO app_user VALUES (2,'MUNAU','MCHISMO@GMAIL.COM','ROSELLE31');
+INSERT INTO app_user VALUES (3,'JOSEPH','JGARCIA@GMAIL.COM','JOSEPH2005');
+INSERT INTO app_user VALUES (4,'ARYSWAGGY','ARYAD@GMAIL.COM','ARYTHECOOLMAN');
+INSERT INTO app_user VALUES (5,'EbelechukwuNwafor','Ebelechukwu.N@ghmail.com','BESTPROF');
+
+INSERT INTO artist VALUES (201,'Bad Bunny');
+INSERT INTO artist VALUES (202,'Clairo');
+INSERT INTO artist VALUES (203,'Mitski');
+INSERT INTO artist VALUES (204,'GenerationX');
+INSERT INTO artist VALUES (205,'Drake');
+
+INSERT INTO song VALUES (101,'EoO',  2025);
+INSERT INTO song VALUES (102,'Bags', 2019);
+INSERT INTO song VALUES (103,'A Pearl', 2018);
+INSERT INTO song VALUES (104,'Dancing with Myself', 1981);
+INSERT INTO song VALUES (105,'NOKIA', 2025);
+
+INSERT INTO song_artist VALUES (101,201);  -- Bad Bunny
+INSERT INTO song_artist VALUES (102,202);  -- Clairo
+INSERT INTO song_artist VALUES (103,203);  -- Mitski
+INSERT INTO song_artist VALUES (104,204);  -- Generation X
+INSERT INTO song_artist VALUES (105,205);  -- Drake
+
+INSERT INTO rating VALUES (1,101,5,'blahhhhh',CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (2,102,4,'blahhhh', CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (3,103,5,'blahhhh', CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (4,104,4,'blahhhh', CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (5,105,4,'blahhhh', CURRENT_TIMESTAMP);
