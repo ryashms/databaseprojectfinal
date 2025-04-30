@@ -1,3 +1,4 @@
+--Artist Average Rating & Number of Ratings
 SELECT  a.artist_id,
         a.name                           AS artist_name,
         ROUND(AVG(r.rating),2)           AS avg_rating,
@@ -8,6 +9,7 @@ JOIN        rating       r  ON r.song_id   = sa.song_id
 GROUP BY a.artist_id, a.name
 ORDER BY avg_rating DESC;
 
+--Song Average Rating
 SELECT  s.title,
         AVG(r.rating) AS avg_rating
 FROM    song   s
