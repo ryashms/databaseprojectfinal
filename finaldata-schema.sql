@@ -67,8 +67,8 @@ INSERT INTO song_artist VALUES (103,203);  -- Mitski
 INSERT INTO song_artist VALUES (104,204);  -- Generation X
 INSERT INTO song_artist VALUES (105,205);  -- Drake
 
-INSERT INTO rating VALUES (1,101,5,'blahhhhh',CURRENT_TIMESTAMP);
-INSERT INTO rating VALUES (2,102,4,'blahhhh', CURRENT_TIMESTAMP);
-INSERT INTO rating VALUES (3,103,5,'blahhhh', CURRENT_TIMESTAMP);
-INSERT INTO rating VALUES (4,104,4,'blahhhh', CURRENT_TIMESTAMP);
-INSERT INTO rating VALUES (5,105,4,'blahhhh', CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (1,101,5,'Truly an amazing song everyone should listen to',CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (2,102,4,'This is so real', CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (3,103,5,'The most beautiful and heartbreaking song I have ever heard, it is honestly too sad so I cant listen to it all the time', CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (4,104,4,'Love it, need more music like this', CURRENT_TIMESTAMP);
+INSERT INTO rating VALUES (5,105,4,'Alright, I wanted better', CURRENT_TIMESTAMP);

@@ -15,3 +15,27 @@ JOIN    rating r ON r.song_id = s.song_id
 GROUP BY s.title
 ORDER BY avg_rating DESC;
 
+--Song Comments
+SELECT review
+FROM rating
+WHERE song_id = 101;
+
+SELECT review
+FROM rating
+WHERE song_id = 102;
+
+SELECT review
+FROM rating
+WHERE song_id = 103;
+
+SELECT review
+FROM rating
+WHERE song_id = 104;
+
+SELECT review
+FROM rating
+WHERE song_id = 105;
+
+--All Ratings Without Comments
+SELECT user_id, song_id, rating, created_at
+FROM rating;
