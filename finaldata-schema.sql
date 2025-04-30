@@ -1,13 +1,11 @@
-/* ---------- drop old objects (order matters) ---------- */
 DROP TABLE rating       CASCADE CONSTRAINTS;
 DROP TABLE song_artist  CASCADE CONSTRAINTS;
 DROP TABLE song         CASCADE CONSTRAINTS;
 DROP TABLE artist       CASCADE CONSTRAINTS;
-DROP TABLE app_user     CASCADE CONSTRAINTS;   -- USER is a reserved word
+DROP TABLE app_user     CASCADE CONSTRAINTS;  
 
-/* ---------- core tables ---------- */
 CREATE TABLE app_user (
-  userid      NUMBER(10),            -- PK
+  userid      NUMBER(10),            
   fname       VARCHAR2(30),
   lname       VARCHAR2(30),
   email       VARCHAR2(255) NOT NULL,
@@ -17,7 +15,7 @@ CREATE TABLE app_user (
 );
 
 CREATE TABLE artist (
-  artistid    NUMBER(10),            -- PK
+  artistid    NUMBER(10),           
   fname       VARCHAR2(30),
   lname       VARCHAR2(30),
   dob         DATE,
@@ -25,13 +23,13 @@ CREATE TABLE artist (
 );
 
 CREATE TABLE song (
-  songid        NUMBER(10),          -- PK
+  songid        NUMBER(10),         
   title         VARCHAR2(200) NOT NULL,
   release_year  NUMBER(4),
   PRIMARY KEY (songid)
 );
 
-/* ---------- bridge: song <-> artist ------------- */
+
 CREATE TABLE song_artist (
   songid   NUMBER(10),
   artistid NUMBER(10),
@@ -40,7 +38,6 @@ CREATE TABLE song_artist (
   FOREIGN KEY (artistid) REFERENCES artist(artistid)
 );
 
-/* ---------- ratings (one per user per song) ---------- */
 CREATE TABLE rating (
   userid   NUMBER(10),
   songid   NUMBER(10),
